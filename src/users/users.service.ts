@@ -41,4 +41,21 @@ export class UsersService {
         return 'User not found'; 
       }
     }
+
+    async changePassword(userId: string, lastPassword: string, newPassword: string): Promise<any> {
+      try {
+        const user = await this.userModel.findOne({ _id: userId });
+
+        if (!user) return { success: false, message: 'User not found.' };
+    
+        if (user.password !== lastPassword) return { success: false, message: 'Invalid password.' };
+        user.password = newPassword;
+        await user.save();
+    
+        return { success: true, message: 'Password updated successfully.' };
+      } catch (error) {
+        return { success: false, message: 'An error occurred while updating the password.' };
+      }
+    }
+    
 }    

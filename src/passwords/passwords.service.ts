@@ -15,4 +15,8 @@ export class PasswordsService {
         const createdPassword = new this.passwordModel(password);
         return createdPassword.save();
     }
+
+    async removePasswordById(passwordId: string) {
+        return await this.passwordModel.deleteOne({ _id: passwordId });
+    }
 }

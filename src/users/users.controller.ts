@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Query, Put, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.schema';
 
@@ -41,6 +41,10 @@ export class UsersController {
     removeUserByLogin(@Query('login') userLogin: string): void {
         this.usersService.removeUserByLogin(userLogin);
     }
-
-    
+    @Put('change-user-password/:userId')
+    async changePassword(@Param('userId') userId: string, @Body() passwords: { lastPassword: string, newPassword: string }): Promise<Object> {
+        const result = await this.usersService.changePassword(userId, passwords.lastPassword, passwords.newPassword);
+        if (result.success) return { success: true, message: 'Password updated successfully.' };
+        else return { success: false, message: result.message };
+    }
 }

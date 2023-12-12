@@ -25,6 +25,7 @@ export class UsersController {
     @Post('login-user')
     async logUser(@Body() user: User) {
         const response = this.usersService.logUser(user);
+        
         return response;
     }
 

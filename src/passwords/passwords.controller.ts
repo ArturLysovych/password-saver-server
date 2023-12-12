@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Query, Param } from '@nestjs/common';
 import { PasswordsService } from './passwords.service';
 import { Password } from './passwords.schema';
 
@@ -9,6 +9,11 @@ export class PasswordsController {
     @Get('all')
     getAll() {
         return this.passwordsService.getAll();
+    }
+
+    @Get(':userId')
+    getPasswordByUserId(@Param('userId') userId: string) {
+      return this.passwordsService.getPasswordByUserId(userId);
     }
 
     @Post('create-password')

@@ -11,6 +11,10 @@ export class PasswordsService {
         return this.passwordModel.find({ });
     }
     
+    getPasswordByUserId(userId: string): Promise<Password[]> {
+        return this.passwordModel.find({userId: userId});
+    }
+
     async createPassword(password: Password) {
         const createdPassword = new this.passwordModel(password);
         return createdPassword.save();

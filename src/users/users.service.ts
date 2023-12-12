@@ -31,11 +31,11 @@ export class UsersService {
       return await this.userModel.deleteOne({ login: userLogin });
     }
 
-    async logUser(user: User): Promise<Boolean | String> {
+    async logUser(user: User): Promise<Boolean | String | User> {
       const findedUser = await this.userModel.findOne({ login: user.login });
 
       if(findedUser) {
-        if(user.login === findedUser.login && user.password === findedUser.password) return true;
+        if(user.login === findedUser.login && user.password === findedUser.password) return findedUser;
         else return false;
       }else {
         return 'User not found'; 

@@ -14,15 +14,11 @@ export class UsersController {
     @Post('register-user')
     async regUser(@Body() user: User): Promise<User | null | string> {
         try {
-            const createdUser = await this.usersService.regUser(user);
-            if (!createdUser) {
-              console.log('This login is already in use');
-              return 'This login is already in use';
-            }
+            const createdUser = await this.usersService.regUser(user); 
             return createdUser;
         } catch(error) {
             console.error('Error while registering user:', error.message);
-            return null;
+            return `Error while registering user: ${error.message}`;
         }
     }
 

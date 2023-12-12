@@ -15,11 +15,11 @@ export class UsersService {
         const findedUser = await this.userModel.findOne({ login: user.login });
   
         if (findedUser) {
-          console.log(`This login is already in use`);
-          return null;
+          return 'This login is already in use';
         } else {
           const createdUser = new this.userModel(user);
-          return createdUser.save();
+          createdUser.save();
+          return 'User was created';
         }
     }
 

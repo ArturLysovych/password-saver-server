@@ -6,7 +6,7 @@ import { Password } from './passwords.schema';
 export class PasswordsController {
     constructor(private readonly passwordsService: PasswordsService) {}
 
-    @Get('all')
+    @Get('')
     getAll() {
         return this.passwordsService.getAll();
     }

@@ -6,7 +6,7 @@ import { User } from './users.schema';
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
-    @Get('all')
+    @Get('')
     getUsers(): Promise<User[]> {
         return this.usersService.getAll();
     }
